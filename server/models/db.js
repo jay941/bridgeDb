@@ -1,7 +1,7 @@
 /**connect mongoose and define schema and exports it  */
 
 var mongoose=require('mongoose');
-mongoose.Promise = global.Promise;
+// mongoose.Promise = global.Promise;
 var config = require('../config/config');
 mongoose.connect(config.MONGO_URI);
 
