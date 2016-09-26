@@ -63,9 +63,9 @@ bridgedb.config(function ($stateProvider, $urlRouterProvider, $authProvider) {
 				*  Satellizer config
 			 */
 				$authProvider.github({
-						url: 'http://localhost:8088/auth/github',
+						url: 'http://localhost:8089/auth/github',
 						clientId: '638c69d1fdbd49dc61e8',
-						redirectUri: 'http://localhost:8088/#/profile'
+						redirectUri: 'http://localhost:8089/#/profile'
 
 				});
 
