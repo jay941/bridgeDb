@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/nextitsoftsys/bridgeDb#readme",
   "dependencies": {
-    "express-validator": "^2.20.10"
+    "express-validator": "^2.20.10",
+    "satellizer": "^0.15.5"
   }
 }
