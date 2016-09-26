@@ -1,5 +1,5 @@
 /**
- * main js 
+ * main js
  * */
 var bridgedb = angular.module('bridgedb', ['ui.router', 'satellizer', 'toaster']);
 
@@ -17,16 +17,17 @@ bridgedb.config(function ($stateProvider, $urlRouterProvider, $authProvider) {
         .state('home', {
             url: '/home',
 
+
             templateUrl: 'views/home.html',
             controller: 'authCtrl'
 
-        })
 
+        })
         .state('login', {
             url: '/login',
-
             templateUrl: 'views/login.html',
             controller: 'loginCtrl'
+
 
             // onEnter:function()
             // {
@@ -35,32 +36,38 @@ bridgedb.config(function ($stateProvider, $urlRouterProvider, $authProvider) {
 
 
 
+
         })
         .state('signup', {
             url: '/signup',
-
-            templateUrl: 'views/signup.html'
-
-
-
+            templateUrl: 'views/signup.html',
+						controller:'signupCtrl'
         })
         .state('profile', {
             url: '/profile',
-
-            templateUrl: 'views/profile.html'
-
-
-
+            templateUrl: 'views/profile.html',
+						controller:'projectCtrl',
+						onEnter:function(){
+							alert("Inside controller");
+						}
         })
-    /**
-    *  Satellizer config
-   */
-    $authProvider.github({
-        url: 'http://localhost:8088/auth/github',
-        clientId: '638c69d1fdbd49dc61e8',
-        redirectUri: 'http://localhost:8088/#/profile'
+				.state('project', {
+            url: '/project?projectName',
+            templateUrl: 'views/project.html',
+						controller:'projectCtrl',
+						onEnter:function(){
+							alert("Inside controller");
+						}
+        })
+				/**
+				*  Satellizer config
+			 */
+				$authProvider.github({
+						url: 'http://localhost:8088/auth/github',
+						clientId: '638c69d1fdbd49dc61e8',
+						redirectUri: 'http://localhost:8088/#/profile'
 
-    });
+				});
 
 
 

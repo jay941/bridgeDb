@@ -1,6 +1,7 @@
 angular.module('bridgedb')
     .controller('loginCtrl', function ($scope, $location, $http, $auth,loginService) {
 
+
         $scope.login = function () {
             var formData = {
                 'email': this.email,
@@ -15,9 +16,9 @@ angular.module('bridgedb')
 //                 } else if (result == 'correct') {
 //                     $location.path('profile');
 //                 }
-                
+
 //             });
- 
+
 
 
             // Accessing the Angular $http Service to send data via REST Communication to Node Server.

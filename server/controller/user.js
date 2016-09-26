@@ -1,5 +1,5 @@
 
-// define require module for app                   
+// define require module for app
 
 var express=require('express');
 var router=express.Router();
@@ -12,13 +12,13 @@ var qs = require('querystring');
 
 console.log(con);
 router.post('/signup',function(req,res){
-	
+
 		var email=req.body.email;
 		var password=req.body.password;
-		
+
 
 	if(email.match(/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/)){
-			var data=new con.User({email,password});
+			var data=new con.User({email:email,password:password});
 					data.save(function(err,data){
 						if(err){
 							res.send(err);
@@ -28,10 +28,37 @@ router.post('/signup',function(req,res){
 					})
 	}else{
 			res.send('incorrect email or password');
+
     }
-			
+
 });
 
+
+
+
+router.post('/project', function(req, res) {
+    console.log(req.body);
+    var projectName = req.body.pro;
+    //	var password=req.body.password;
+    console.log('projectName', projectName);
+
+    // if(email.match(/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/)){
+    var data = new con.project({
+        projectName : projectName
+    });
+    console.log('projectcreated', projectName);
+    data.save(function(err, user) {
+            if (err) {
+                res.send('project already available');
+                //console.log(err);
+            } else {
+              console.log("print user");
+                res.send('successfully upload');
+
+            }
+        })
+
+});
 
 router.post('/login',function(req,res){
 		var email=req.body.email;
@@ -61,9 +88,10 @@ function createJWT(user) {
     iat: moment().unix(),
     exp: moment().add(14, 'days').unix()
   };
-  
+
   return jwt.encode(payload, config.TOKEN_SECRET);
 }
+
 
 /*
  |--------------------------------------------------------------------------
@@ -71,7 +99,7 @@ function createJWT(user) {
  |--------------------------------------------------------------------------
  */
 router.post('/auth/github', function(req, res) {
-  
+
   var accessTokenUrl = 'https://github.com/login/oauth/access_token';
   var userApiUrl = 'https://api.github.com/user';
   var params = {
@@ -88,7 +116,7 @@ router.post('/auth/github', function(req, res) {
            console.log('existingUser',headers,'accessToken',accessToken)
     // Step 2. Retrieve profile information about the current user.
     request.get({ url: userApiUrl, qs: accessToken, headers: headers, json: true }, function(err, response, profile) {
-        
+
       // Step 3a. Link user accounts.
       if (req.header('Authorization')) {
         console.log(req.header)
@@ -138,4 +166,4 @@ router.post('/auth/github', function(req, res) {
   });
 });
 
-module.exports=router;
+module.exports = router;

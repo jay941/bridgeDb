@@ -6,6 +6,7 @@ angular.module('bridgedb')
                 'email': this.email,
                 'password': this.pwd
 
+
             }
             // Accessing the Angular $http Service to send data via REST Communication to Node Server.
             $http.post('http://localhost:8088/signup', formData).success(function (data, status) {
