@@ -5,7 +5,7 @@ var bridgedb = angular.module('bridgedb', ['ui.router', 'satellizer', 'toaster']
 
 /** configure existing services */
 bridgedb.config(function ($stateProvider, $urlRouterProvider, $authProvider) {
-
+ $authProvider.loginUrl = 'http://localhost:8089/auth/verify';
 	/**
          * @default Home
          */

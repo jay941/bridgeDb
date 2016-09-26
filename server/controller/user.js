@@ -5,10 +5,10 @@ var express=require('express');
 var router=express.Router();
 var con=require('../models/db');
 var config = require('../config/config');
-var request = require('request');
-var moment = require('moment');
-var jwt = require('jwt-simple');
-var qs = require('querystring');
+
+
+var jwt = require('jsonwebtoken');
+
 
 console.log(con);
 router.post('/signup',function(req,res){
@@ -77,21 +77,6 @@ router.post('/login',function(req,res){
 			}
 });
 
-/*
- |--------------------------------------------------------------------------
- | Generate JSON Web Token
- |--------------------------------------------------------------------------
- */
-function createJWT(user) {
-  var payload = {
-    sub: user._id,
-    iat: moment().unix(),
-    exp: moment().add(14, 'days').unix()
-  };
-
-  return jwt.encode(payload, config.TOKEN_SECRET);
-}
-
 
 /*
  |--------------------------------------------------------------------------
@@ -99,71 +84,36 @@ function createJWT(user) {
  |--------------------------------------------------------------------------
  */
 router.post('/auth/github', function(req, res) {
+   
+   let clientId = req.body.clientId;
+   var token = jwt.sign(clientId, config.GITHUB_SECRET);
+   res.json({ token: token });
 
-  var accessTokenUrl = 'https://github.com/login/oauth/access_token';
-  var userApiUrl = 'https://api.github.com/user';
-  var params = {
-    code: req.body.code,
-    client_id: req.body.clientId,
-    client_secret: config.GITHUB_SECRET,
-    redirect_uri: req.body.redirectUri
-  };
- console.log(params)
-  // Step 1. Exchange authorization code for access token.
-  request.get({ url: accessTokenUrl, qs: params }, function(err, response, accessToken) {
-    accessToken = qs.parse(accessToken);
-    var headers = { 'User-Agent': 'Satellizer' };
-           console.log('existingUser',headers,'accessToken',accessToken)
-    // Step 2. Retrieve profile information about the current user.
-    request.get({ url: userApiUrl, qs: accessToken, headers: headers, json: true }, function(err, response, profile) {
+});
 
-      // Step 3a. Link user accounts.
-      if (req.header('Authorization')) {
-        console.log(req.header)
-       	con.User.findOne({ github: profile.id }, function(err, existingUser) {
-           console.log('existingUser',existingUser)
-          if (existingUser) {
-            return res.status(409).send({ message: 'There is already a GitHub account that belongs to you' });
-          }
-          var token = req.header('Authorization').split(' ')[1];
-          var payload = jwt.decode(token, config.TOKEN_SECRET);
-          console.log(payload);
 
-          	con.User.findById(payload.sub, function(err, user) {
-              console.log(user)
-            if (!user) {
-              return res.status(400).send({ message: 'User not found' });
+router.post('/verify', function(req, res) {
+    var token = req.body.token || req.query.token || req.headers['x-access-token'];
+    if (token) {
+        jwt.verify(token, config.GITHUB_SECRET, function(err, decoded) {
+            if (err) {
+                res.json({
+                    success: false,
+                    message: 'failed to authenticate token'
+                });
+            } else {
+                res.json({
+                    message: 'successfully authentication process',
+                    result: decoded
+                });
             }
-            user.github = profile.id;
-            user.picture = user.picture || profile.avatar_url;
-            user.displayName = user.displayName || profile.name;
-            user.save(function() {
-              var token = createJWT(user);
-              res.send({ token: token });
-            });
-          });
         });
-      } else {
-        // Step 3b. Create a new user account or return an existing one.
-       	con.User.findOne({ github: profile.id }, function(err, existingUser) {
-          if (existingUser) {
-            var token = createJWT(existingUser);
-            return res.send({ token: token });
-          }
-          var user = new con.User();
-          user.github = profile.id;
-          user.picture = profile.avatar_url;
-          user.displayName = profile.name;
-          user.email = profile.email;
-          console.log(user)
-          user.save(function() {
-            var token = createJWT(user);
-            res.send({ token: token });
-          });
+    } else {
+        res.status(403).send({
+            success: false,
+            message: 'No token provide...'
         });
-      }
-    });
-  });
+    }
 });
 
 module.exports = router;

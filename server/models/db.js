@@ -20,5 +20,5 @@ var userSchema=mongoose.Schema({
 
   var project=mongoose.model('project',project);
  exports.project=project;
- var User=mongoose.model('User',userSchema);
+ var User=mongoose.model('User',userSchema,'User');
 exports.User=User;
