@@ -1,14 +1,18 @@
 /**connect mongoose and define schema and exports it  */
 
 var mongoose=require('mongoose');
-var url = 'mongodb://localhost:27017/bridgedb';
-var con=mongoose.connect(url);
- console.log(con)
-var user=mongoose.Schema({
+ mongoose.Promise = global.Promise;
+var config = require('../config/config');
+mongoose.connect(config.MONGO_URI);
+ 
+var userSchema=mongoose.Schema({
     
-     email:{type:String ,required:true},
-     password:{type:String,required:true}
+     email:{type:String ,unique: true, lowercase: true},
+     password:{type:String,select: false},
+     displayName: String,
+     picture: String,
+     github: String
  });
 
- var user=mongoose.model('user',user);
-exports.user=user;
+ var User=mongoose.model('User',userSchema);
+exports.User=User;
