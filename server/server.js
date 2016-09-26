@@ -1,7 +1,7 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 
-var port = process.env.PORT || 8088;
+var port = process.env.PORT || 8089;
 
 var app = express();
 var jwt = require('jwt-simple');

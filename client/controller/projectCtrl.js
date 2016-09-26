@@ -17,7 +17,7 @@ angular.module('bridgedb')
             // alert($scope.projectData.projectName);
             $http({
                 method: "POST",
-                url: "http://localhost:8082/project",
+                url: "http://localhost:8089/project",
                 data: x,
                 headers: {
                     "Content-type": 'application/json'
