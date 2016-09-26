@@ -5,7 +5,7 @@ var bridgedb = angular.module('bridgedb', ['ui.router', 'satellizer', 'toaster']
 
 /** configure existing services */
 bridgedb.config(function ($stateProvider, $urlRouterProvider, $authProvider) {
-
+ $authProvider.loginUrl = 'http://localhost:8089/auth/verify';
 	/**
          * @default Home
          */
@@ -47,9 +47,9 @@ bridgedb.config(function ($stateProvider, $urlRouterProvider, $authProvider) {
             url: '/profile',
             templateUrl: 'views/profile.html',
 						controller:'projectCtrl',
-						onEnter:function(){
-							alert("Inside controller");
-						}
+						// onEnter:function(){
+						// 	alert("Inside controller");
+						// }
         })
 				.state('project', {
             url: '/project?projectName',
