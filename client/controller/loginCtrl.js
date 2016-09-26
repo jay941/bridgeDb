@@ -2,10 +2,11 @@ angular.module('bridgedb')
 .controller('loginCtrl',function($scope,$location,$http){
 
     $scope.login=function(){
+
         var formData  = {
                 'email' : this.email,
                 'password' : this.pwd
-                
+
         }
     // Accessing the Angular $http Service to send data via REST Communication to Node Server.
     $http.post('http://localhost:8082/login',formData).success(function (data,status) {
@@ -23,7 +24,7 @@ angular.module('bridgedb')
     $scope.user='',
    $scope.password=''
     }
-       
-  	 
-    
+
+
+
 })
