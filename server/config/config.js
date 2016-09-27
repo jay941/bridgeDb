@@ -4,7 +4,7 @@ module.exports = {
 TOKEN_SECRET: process.env.TOKEN_SECRET || '1234jay',
 
   // OAuth 2.0
-  //  GOOGLE_SECRET: process.env.GOOGLE_SECRET || ' 7ZqxlVx61ruyZAQ4m-OnpWqb'
+   GOOGLE_SECRET: process.env.GOOGLE_SECRET || ' lk44y8FWQBifx8MT2Wtc8p32 ',
 //   FACEBOOK_SECRET: process.env.FACEBOOK_SECRET || '84e952da26fc9e7a12bbc32523efa8a0',
 //   FOURSQUARE_SECRET: process.env.FOURSQUARE_SECRET || 'YOUR_FOURSQUARE_CLIENT_SECRET',
 //   GOOGLE_SECRET: process.env.GOOGLE_SECRET || 'YOUR_GOOGLE_CLIENT_SECRET',

@@ -112,6 +112,19 @@ router.post('/auth/github', function(req, res) {
 
 });
 
+/*
+ |--------------------------------------------------------------------------
+ | Login with Google
+ |--------------------------------------------------------------------------
+ */
+router.post('/auth/google', function(req, res) {
+   
+   let clientId = req.body.clientId;
+   var token = jwt.sign(clientId, config.GITHUB_SECRET);
+   res.json({ token: token });
+
+});
+
 
 router.post('/verify', function(req, res) {
     var token = req.body.token || req.query.token || req.headers['x-access-token'];
