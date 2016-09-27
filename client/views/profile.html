@@ -1,5 +1,7 @@
-<div class="container" ng-controller="projectCtrl">
-    <nav class="navbar navbar-default navbar-fixed-top">
+ 
+<div class="container" ng-controller="projectCtrl" >
+
+    <nav class="navbar navbar-default navbar-fixed-top" >
         <div class="container">
             <div>
                 <h1 class="nav navbar-nav navbar-default">BridgeDb</h1>
@@ -64,7 +66,7 @@
     </div>
     <hr>
 <div class="container" >  
-    <div ng-repeat="d in projectName1">
+    <div ng-repeat="d in projectName1 track by $index">
     <div class="col-sm-4">
   <div class="div1">{{d.projectName}}</div>
   
@@ -72,7 +74,7 @@
 </div>
 </div>
   
-</div>
+
 <script>
     $(document).ready(function() {
         $("#myBtn").click(function() {

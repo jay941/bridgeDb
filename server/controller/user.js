@@ -137,12 +137,27 @@ router.post('/verify', function(req, res) {
     }
 });
 
-// /*
-//  |--------------------------------------------------------------------------
-//  | Retriving project detail from mongo
-//  |--------------------------------------------------------------------------
-//  */
-// router.get('/retrive',function(req,res){
-//   con.project.find({projectname})
-// })
+/*
+ |--------------------------------------------------------------------------
+ | Retriving project detail from mongo
+ |--------------------------------------------------------------------------
+ */
+router.get('/retrive',function(req,res){
+  con.project.find(function(err,projectRe){
+      if (err) {
+                res.send('project already available');
+                //console.log(err);
+            } 
+               else{
+                   res.send(projectRe);
+                 }
+               
+            
+              console.log("print user");
+                // res.send(user);
+
+            
+
+  })
+})
 module.exports = router;

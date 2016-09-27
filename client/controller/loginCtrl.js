@@ -18,18 +18,8 @@ angular.module('bridgedb')
             //     }
             //
             // });
-
-
-
-
-            // // Accessing the Angular $http Service to send data via REST Communication to Node Server.
-
-
-
-            // Accessing the Angular $http Service to send data via REST Communication to Node Server.
-
-
-            $http.post('http://localhost:8089/login', formData).success(function (data, status) {
+    // Accessing the Angular $http Service to send data via REST Communication to Node Server.
+   $http.post('http://localhost:8090/login', formData).success(function (data, status) {
 
                 console.log(data)
                 if (data == 'incorrect email' || data == 'not found' && status == 200) {
