@@ -1,7 +1,49 @@
-body
-{ padding-top:80px;
- word-wrap: break-word; }
+body {
+    padding-top: 80px;
+    word-wrap: break-word;
+}
+.modal-header, h4, .close {
+    background-color: #5cb85c;
+    color: white !important;
+    text-align: center;
+    font-size: 30px;
+}
+.modal-footer {
+    background-color: #f9f9f9;
+}
+@import url('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css');
 
+
+div {
+    /*margin-bottom: 20px;*/
+}
+.circle-icon .glyphicon {
+        background-color: purple;
+        color: white;
+        padding: 30px;
+        font-size: 6em;
+        border-radius: 50%;
+}
+.circle-singleline {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    font-size: 50px;
+    line-height: 100px;
+    text-align: center;
+    background: purple;
+    color: #fff;
+}
+.circle-multiline {
+    /*display: table-cell;*/
+    height: 100px;
+    width: 100px;
+    text-align: center;
+    vertical-align: middle;
+    border-radius: 50%;
+    background: purple;
+    color: white;
+}
 .modal-header,h4,
 
 .close {

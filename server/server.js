@@ -4,7 +4,7 @@ var bodyParser = require('body-parser');
 var port = process.env.PORT || 8090;
 
 var app = express();
-var jwt = require('jwt-simple');
+
 var user = require('./controller/user');
 
 app.use(bodyParser.json());

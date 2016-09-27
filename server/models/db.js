@@ -1,11 +1,11 @@
 /**connect mongoose and define schema and exports it  */
 
-var mongoose=require('mongoose');
+var mongoose = require('mongoose');
 
 var config = require('../config/config');
 mongoose.connect(config.MONGO_URI);
 
-var userSchema=mongoose.Schema({
+var userSchema = mongoose.Schema({
 
      email:{type:String ,unique: true, lowercase: true},
      password:{type:String,select: false}
@@ -15,7 +15,8 @@ var userSchema=mongoose.Schema({
      //  password:{type:String,required:true}
   });
 
-  var project=mongoose.model('project',project);
- exports.project=project;
- var User=mongoose.model('User',userSchema,'User');
-exports.User=User;
+
+var project = mongoose.model('project', project);
+exports.project = project;
+var User = mongoose.model('User', userSchema, 'User');
+exports.User = User;
