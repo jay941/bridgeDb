@@ -1,79 +1,47 @@
+<div ng-controller="projectCtrl">
+  <div nav-header></div>
+</div>
 <div class="container" ng-controller="projectCtrl">
-    <nav class="navbar navbar-default navbar-fixed-top">
-        <div class="container">
-            <div>
-                <h1 class="nav navbar-nav navbar-default">BridgeDb</h1>
-            </div>
-            <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <a href="/connect/local" class="fa fa-user"></a>
-                </li>
-                <li>
-                    <a href="/connect/google" class="fa fa-google-plus"></a>
-                </li>
-                <li>
-                    <a href="/connect/facebook" class="fa fa-facebook"></a>
-                </li>
-                <li>
-                    <a href="/connect/twitter" class="fa fa-twitter"></a>
-                </li>
-                <li> <a ui-sref="home" class="btn btn-info btn-lg">Logout</a></li>
-            </ul>
-        </div>
-    </nav>
 
-    <div class="container">
+    <!-- Trigger the modal with a button -->
+    <button type="button" class="btn btn-primary" id="myBtn">create project</button>
 
-        <!-- Trigger the modal with a button -->
-        <button type="button" class="btn btn-primary" id="myBtn">create project</button>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
 
-        <!-- Modal -->
-        <div class="modal fade" id="myModal" role="dialog">
-            <div class="modal-dialog">
-
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header" style="padding:35px 50px;">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4><span class="glyphicon glyphicon-lock"></span> Create Project</h4>
-                    </div>
-                    <div class="modal-body" style="padding:40px 50px;">
-                        <form method="post" >
-                            <div class="form-group">
-                                <label for="projectname">project name</label>
-
-                                <input type="text" class="form-control" id="projectname" placeholder="Enter name" ng-model="projectName">
-
-                            </div>
-
-
-
-
-                            <!-- <button type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-off"></span> Login</button> -->
-                            <button type="submit" ng-click="data()"  class="btn btn-success btn-block" data-dismiss="modal" ><span class="glyphicon glyphicon-off"></span> Create </button>
-
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
-                    </div>
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header" style="padding:35px 50px;">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4><span class="glyphicon glyphicon-lock"></span> Create Project</h4>
                 </div>
+                <div class="modal-body" style="padding:40px 50px;">
+                    <form method="post" >
+                        <div class="form-group">
+                            <label for="projectname">project name</label>
 
+                            <input type="text" class="form-control" id="projectname" placeholder="Enter name" ng-model="projectName">
+                        </div>
+                        <!-- <button type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-off"></span> Login</button> -->
+                        <button type="submit" ng-click="createProject()"  class="btn btn-success btn-block" data-dismiss="modal" ><span class="glyphicon glyphicon-off"></span> Create </button>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+                </div>
             </div>
+
         </div>
     </div>
-    {{projectName1}}</h1>
+</div>
+
 </div>
 <script>
-    $(document).ready(function() {
-        $("#myBtn").click(function() {
-            $("#myModal").modal();
-
-
-        });
-
-
-
+$(document).ready(function() {
+    $("#myBtn").click(function() {
+        $("#myModal").modal();
     });
-
+});
 </script>

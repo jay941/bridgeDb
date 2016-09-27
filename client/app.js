@@ -52,7 +52,7 @@ bridgedb.config(function ($stateProvider, $urlRouterProvider, $authProvider) {
 						// }
         })
 				.state('project', {
-            url: '/project?projectName',
+            url: '/project',
             templateUrl: 'views/project.html',
 						controller:'projectCtrl',
 						onEnter:function(){
