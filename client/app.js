@@ -5,7 +5,7 @@ var bridgedb = angular.module('bridgedb', ['ui.router', 'satellizer', 'toaster']
 
 /** configure existing services */
 bridgedb.config(function ($stateProvider, $urlRouterProvider, $authProvider) {
- $authProvider.loginUrl = 'http://localhost:8089/auth/verify';
+ $authProvider.loginUrl = 'http://localhost:8090/auth/verify';
 	/**
          * @default Home
          */
@@ -63,9 +63,9 @@ bridgedb.config(function ($stateProvider, $urlRouterProvider, $authProvider) {
 				*  Satellizer config
 			 */
 				$authProvider.github({
-						url: 'http://localhost:8089/auth/github',
+						url: 'http://localhost:8090/auth/github',
 						clientId: '638c69d1fdbd49dc61e8',
-						redirectUri: 'http://localhost:8089/#/profile'
+						redirectUri: 'http://localhost:8090/#/profile'
 
 				});
 

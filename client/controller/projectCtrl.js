@@ -1,4 +1,5 @@
 angular.module('bridgedb')
+
     .controller('projectCtrl', function($scope, $location, $http) {
         $scope.projectName1 = "";
         $scope.projectName = "";
@@ -27,8 +28,6 @@ angular.module('bridgedb')
 
                 console.log(data);
                 $location.path('project')  ;
-            });
-        }
     })
     .directive('navHeader', function() {
   return {
