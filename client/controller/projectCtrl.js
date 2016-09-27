@@ -1,37 +1,43 @@
 angular.module('bridgedb')
 
+
 .controller('projectCtrl', function($scope, $location, $http) {
+
         $scope.projectName1 = "";
         $scope.projectName = "";
+
+        $http.get('http://localhost:8090/retrive').success(function(data) {
+
+            console.log(data);
+            $scope.projectName1 = data;
+            // $location.path('project')  ;
+
+        })
+
+
         //  alert('in project controller');
         $scope.createProject = function(projectName) {
-
-            $scope.projectName1 = $scope.projectName;
-
-            alert($scope.projectName1);
             var x = {
-                    pro: $scope.projectName
-                }
-                // alert(JSON.stringify(x.pro));
-            alert(x.pro);
+                pro: $scope.projectName
+            };
 
-            // alert($scope.projectData.projectName);
-            $http({
-                method: "POST",
-                url: "http://localhost:8090/project",
-                data: x,
-                headers: {
-                    "Content-type": 'application/json'
-                }
-            }).
-            success(function(data, status, headers, config) {
+            $http.post('http://localhost:8090/project', x).success(function(data) {
 
                 console.log(data);
-                $location.path('project');
-            });
+                printData(data);
+                // $location.path('project')  ;
+
+            })
+        };
+
+        function printData(data) {
+            $scope.projectName1 = data;
         }
+
+
     })
     .directive('navHeader', function() {
+
         return {
             templateUrl: 'views/navHeader.html'
         };

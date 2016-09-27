@@ -70,5 +70,16 @@ bridgedb.config(function ($stateProvider, $urlRouterProvider, $authProvider) {
 				});
 
 
+				/**
+				*  Satellizer config
+			 */
+				$authProvider.google({
+						url: 'http://localhost:8090auth/google',
+						clientId: '145774676150-tp0rbo87l17l4fddtogs1ilqrqvq22vo.apps.googleusercontent.com',
+						redirectUri: 'http://localhost:8090/profile'
+
+				});
+
+
 
 });
