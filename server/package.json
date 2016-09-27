@@ -1,17 +1,18 @@
 {
   "name": "bridgedb",
   "version": "1.0.0",
-  "description": "",
+  "description": "ERROR: No README data found!",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nextitsoftsys/bridgeDb.git"
   },
   "author": "",
-  "license": "ISC",
+  "license": "BSD-2-Clause",
   "bugs": {
     "url": "https://github.com/nextitsoftsys/bridgeDb/issues"
   },
@@ -28,5 +29,6 @@
     "moment": "^2.15.1",
     "mongo": "^0.1.0",
     "mongoose": "^4.6.1"
-  }
+  },
+  "devDependencies": {}
 }

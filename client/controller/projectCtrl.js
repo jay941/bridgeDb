@@ -25,7 +25,7 @@ angular.module('bridgedb')
 
                 console.log(data);
                 printData(data);
-                // $location.path('project')  ;
+                 $location.path('project')  ;
 
             })
         };

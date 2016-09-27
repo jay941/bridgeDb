@@ -66,7 +66,7 @@ router.post('/project', function(req, res) {
                  else{
                    res.send(result);
                  }
-               
+
                })
               console.log("print user");
                 // res.send(user);
@@ -77,7 +77,7 @@ router.post('/project', function(req, res) {
 });
 /*
  |--------------------------------------------------------------------------
- | Login 
+ | Login
  |--------------------------------------------------------------------------
  */
 
@@ -104,32 +104,57 @@ router.post('/login',function(req,res){
  | Login with GitHub
  |--------------------------------------------------------------------------
  */
-router.post('/auth/github', function(req, res) {
-   
-   let clientId = req.body.clientId;
-   var token = jwt.sign(clientId, config.GITHUB_SECRET);
-   res.json({ token: token });
+// router.post('/auth/github', function(req, res) {
+//
+//    let clientId = req.body.clientId;
+//    var token = jwt.sign(clientId, config.GITHUB_SECRET);
+//    res.json({ token: token });
+//
+// });
 
+router.post('/verify', function(req, res) {
+    var token = req.body.token || req.query.token || req.headers['x-access-token'];
+    if (token) {
+        jwt.verify(token, config.GITHUB_SECRET, function(err, decoded) {
+            if (err) {
+                res.json({
+                    success: false,
+                    message: 'failed to authenticate token'
+                });
+            } else {
+                res.json({
+                    message: 'successfully authentication process',
+                    result: decoded
+                });
+            }
+        });
+    } else {
+        res.status(403).send({
+            success: false,
+            message: 'No token provide...'
+        });
+    }
 });
+
 
 /*
  |--------------------------------------------------------------------------
  | Login with Google
  |--------------------------------------------------------------------------
  */
-router.post('/auth/google', function(req, res) {
-   
-   let clientId = req.body.clientId;
-   var token = jwt.sign(clientId, config.GITHUB_SECRET);
-   res.json({ token: token });
-
-});
+// router.post('/auth/google', function(req, res) {
+//
+//    let clientId = req.body.clientId;
+//    var token = jwt.sign(clientId, config.GITHUB_SECRET);
+//    res.json({ token: token });
+//
+// });
 
 
 router.post('/verify', function(req, res) {
     var token = req.body.token || req.query.token || req.headers['x-access-token'];
     if (token) {
-        jwt.verify(token, config.GITHUB_SECRET, function(err, decoded) {
+        jwt.verify(token, config.GOOGLE_SECRET, function(err, decoded) {
             if (err) {
                 res.json({
                     success: false,
@@ -161,16 +186,16 @@ router.get('/retrive',function(req,res){
       if (err) {
                 res.send('project already available');
                 //console.log(err);
-            } 
+            }
                else{
                    res.send(projectRe);
                  }
-               
-            
+
+
               console.log("print user");
                 // res.send(user);
 
-            
+
 
   })
 })
