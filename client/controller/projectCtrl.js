@@ -1,45 +1,59 @@
 angular.module('bridgedb')
 
-    .controller('projectCtrl', function ($scope, $location, $http) {
+    .controller('projectCtrl', function ($scope, $location, $http,loginService,$stateParams) {
         $scope.projectName1 = "";
         $scope.projectName = "";
+        $scope.param=$stateParams.param;
+  var data={
+      key:$scope.param
+  }
 
-            $http.get('http://localhost:8090/retrive').success(function (data) {
+     $scope.user=$scope.param;
+     console.log('data',data)
+        
+$http.post('http://localhost:8090/retrive',data).success(function (data) {
 
-                console.log(data);
-                $scope.projectName1 = data;
-                // $location.path('project')  ;
+            console.log(data);
+            $scope.projectName1 = data;
+            // $location.path('project')  ;
 
-            })
+        })
+ $scope.createProject = function (projectName) {
+ var x = {
+                pro: $scope.projectName,
+                key:$scope.param
 
-
-        //  alert('in project controller');
-        $scope.createProject = function (projectName) {
-
-
-
-
-            var x = {
-                pro: $scope.projectName
             }
+               console.log('project',x)
 
 
 
+            $http.post('http://localhost:8090/project', x).success(function (data1) {
+                console.log(data1);
 
-            $http.post('http://localhost:8090/project', x).success(function (data) {
+       $http.post('http://localhost:8090/retrive',data).success(function (data12) {
 
-                console.log(data);
-                printData(data);
+            console.log(data12);
+            $scope.projectName1 = data12;
+            // $location.path('project')  ;
+
+        })
+                // console.log(data);
+                // printData(data);
                 // $location.path('project')  ;
 
             })
         };
-        function printData(data) {
-           $scope.projectName1 = data;
+        // function printData(data) {
+        //     $scope.projectName1 = data;
+        // }
+        $scope.project = function () {
+            $location.path('project');
         }
 
-
     })
+
+
     .directive('navHeader', function () {
         return {
             templateUrl: 'views/navHeader.html'

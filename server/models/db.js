@@ -12,6 +12,7 @@ var userSchema = mongoose.Schema({
  });
  var project=mongoose.Schema({
       projectName :{type:String ,required:true},
+       key :{type:String ,required:true},
      //  password:{type:String,required:true}
   });
 
