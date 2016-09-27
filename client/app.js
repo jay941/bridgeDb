@@ -44,7 +44,7 @@ bridgedb.config(function ($stateProvider, $urlRouterProvider, $authProvider) {
 						controller:'signupCtrl'
         })
         .state('profile', {
-            url: '/profile',
+            url: '/profile?param',
             templateUrl: 'views/profile.html',
 						controller:'projectCtrl',
 						// onEnter:function(){
@@ -55,9 +55,9 @@ bridgedb.config(function ($stateProvider, $urlRouterProvider, $authProvider) {
             url: '/project',
             templateUrl: 'views/project.html',
 						controller:'projectCtrl',
-						onEnter:function(){
-							alert("Inside controller");
-						}
+						// onEnter:function(){
+						// 	alert("Inside controller");
+						// }
         })
 				/**
 				*  Satellizer config

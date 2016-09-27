@@ -46,13 +46,12 @@ if(email.match(/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}
 router.post('/project', function(req, res) {
     console.log(req.body);
     var projectName = req.body.pro;
+    var key = req.body.key;
     //	var password=req.body.password;
-    console.log('projectName', projectName);
+    console.log('projectName', projectName,key);
 
     // if(email.match(/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/)){
-    var data = new con.project({
-        projectName : projectName
-    });
+    var data = new con.project({projectName : projectName, key:key});
     console.log('projectcreated', projectName);
     data.save(function(err, user) {
             if (err) {
@@ -64,7 +63,7 @@ router.post('/project', function(req, res) {
                    res.send('data not prasent');
                  }
                  else{
-                   res.send(result);
+                   res.send("saved");
                  }
 
                })
@@ -90,7 +89,7 @@ router.post('/login',function(req,res){
 					if(!existingUser){
 						res.send('not found');
 					}else{
-						res.send('correct');
+						res.send(existingUser);
 					}
 				})
 		}else{
@@ -112,6 +111,29 @@ router.post('/login',function(req,res){
 //
 // });
 
+router.post('/verify', function(req, res) {
+    var token = req.body.token || req.query.token || req.headers['x-access-token'];
+    if (token) {
+        jwt.verify(token, config.GITHUB_SECRET, function(err, decoded) {
+            if (err) {
+                res.json({
+                    success: false,
+                    message: 'failed to authenticate token'
+                });
+            } else {
+                res.json({
+                    message: 'successfully authentication process',
+                    result: decoded
+                });
+            }
+        });
+    } else {
+        res.status(403).send({
+            success: false,
+            message: 'No token provide...'
+        });
+    }
+});
 router.post('/verify', function(req, res) {
     var token = req.body.token || req.query.token || req.headers['x-access-token'];
     if (token) {
@@ -181,8 +203,10 @@ router.post('/verify', function(req, res) {
  | Retriving project detail from mongo
  |--------------------------------------------------------------------------
  */
-router.get('/retrive',function(req,res){
-  con.project.find(function(err,projectRe){
+router.post('/retrive',function(req,res){
+   var  key=req.body.key;
+    console.log('key',key)
+  con.project.find({key:key},function(err,projectRe){
       if (err) {
                 res.send('project already available');
                 //console.log(err);
@@ -199,4 +223,5 @@ router.get('/retrive',function(req,res){
 
   })
 })
+
 module.exports = router;

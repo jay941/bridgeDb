@@ -3,30 +3,37 @@ angular.module('bridgedb')
 
 
         $scope.login = function() {
+          
             var formData = {
                 'email': this.email,
                 'password': this.pwd
 
             }
-            // loginService.login(formData).then(function(result) {
-            //     alert("hi");
-            //     if (result == 'incorrect email' || result == 'not found') {
-            //         alert('Invalid Email and Password');
-            //         $location.path('login');
-            //     } else if (result == 'correct') {
-            //         $location.path('profile');
-            //     }
-            //
+
+           
+          
+            // loginService.login(e).then(function(result) {
+            //     // alert("hi");
+            //     // if (result == 'incorrect email' || result == 'not found') {
+            //     //     alert('Invalid Email and Password');
+            //     //     $location.path('login');
+            //     // } else if (result == 'correct') {
+            //     //     $location.path('profile');
+            //     // }
+            
             // });
     // Accessing the Angular $http Service to send data via REST Communication to Node Server.
    $http.post('http://localhost:8090/login', formData).success(function (data, status) {
 
-                console.log(data)
+          
                 if (data == 'incorrect email' || data == 'not found' && status == 200) {
                     alert('Invalid Email and Password');
                     $location.path('login');
-                } else if (data == 'correct' && status == 200) {
-                    $location.path('profile');
+                } else if (status == 200) {
+                    //passing user id to nav header
+                      loginService.login(data.email);
+                     
+                    $location.path('profile').search({param: data.email});;
                 }
             }).catch(function (data) {
                 $scope.loading = false;
