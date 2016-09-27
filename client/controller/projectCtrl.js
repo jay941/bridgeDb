@@ -1,7 +1,6 @@
 angular.module('bridgedb')
-
-    .controller('projectCtrl', function ($scope, $location, $http,loginService,$stateParams) {
-        $scope.projectName1 = "";
+.controller('projectCtrl', function ($scope, $location, $http,loginService,$stateParams) {
+     $scope.projectName1 = "";
         $scope.projectName = "";
         $scope.param=$stateParams.param;
   var data={
@@ -23,6 +22,7 @@ $http.post('http://localhost:8090/retrive',data).success(function (data) {
                 pro: $scope.projectName,
                 key:$scope.param
 
+
             }
                console.log('project',x)
 
@@ -31,31 +31,19 @@ $http.post('http://localhost:8090/retrive',data).success(function (data) {
             $http.post('http://localhost:8090/project', x).success(function (data1) {
                 console.log(data1);
 
-       $http.post('http://localhost:8090/retrive',data).success(function (data12) {
+            $http.post('http://localhost:8090/retrive',data).success(function (data12) {
 
             console.log(data12);
             $scope.projectName1 = data12;
             // $location.path('project')  ;
 
-        })
-                // console.log(data);
-                // printData(data);
-                // $location.path('project')  ;
 
-            })
-        };
-        // function printData(data) {
-        //     $scope.projectName1 = data;
-        // }
-        $scope.project = function () {
-            $location.path('project');
-        }
-
+       });
+            });
+ };
     })
-
-
-    .directive('navHeader', function () {
-        return {
+ .directive('navHeader', function() {
+return {
             templateUrl: 'views/navHeader.html'
         };
     });

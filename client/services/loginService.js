@@ -1,5 +1,6 @@
 angular.module('bridgedb')
 .service('loginService',function($http){
+
  var email;
     return {
         login :function(e){
@@ -9,5 +10,6 @@ angular.module('bridgedb')
         getlogin:function(){
             return email;
         }
+
     }
 })
