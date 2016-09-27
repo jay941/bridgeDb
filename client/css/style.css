@@ -14,3 +14,17 @@ body
         .modal-footer {
             background-color: #f9f9f9;
         }
+#s{
+    background-color:lightcyan;
+  border: 2px solid black;
+    border-radius: 12px;
+    width: 30px;
+    height: 40px;
+}
+.div1{
+     background-color: lightgrey;
+    width: 300px;
+    border: 2px solid black;
+    padding: 40px;
+    margin: 10px;
+}

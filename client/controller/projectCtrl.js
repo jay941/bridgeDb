@@ -5,29 +5,26 @@ angular.module('bridgedb')
         $scope.projectName = "";
         //  alert('in project controller');
         $scope.data = function(projectName) {
-
-            $scope.projectName1 = $scope.projectName;
+  var final={};
+            // $scope.projectName1 = $scope.projectName;
 
            
             var x = {
                     pro : $scope.projectName
                 }
-               
-           
-            $http({
-                method: "POST",
-                url: "http://localhost:8089/project",
-                data: x,
-                headers: {
-                    "Content-type": 'application/json'
-                }
-            }).
-            success(function(data, status, headers, config) {
-             
-                console.log(data);
+                $http.post('http://localhost:8090/project', x).success(function(data) {
+                final=data;
                 $location.path('project')  ;
+                printData(data);
+              
                  
             });
+
+          function printData(data){
+              $scope.projectName1=data
+          
+          }
+
         }
        
     })

@@ -11,13 +11,16 @@ var jwt = require('jsonwebtoken');
 
 
 console.log(con);
+/*
+ |--------------------------------------------------------------------------
+ | signup
+ |--------------------------------------------------------------------------
+ */
 router.post('/signup',function(req,res){
 
 		var email=req.body.email;
 		var password=req.body.password;
-
-
-	if(email.match(/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/)){
+if(email.match(/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/)){
 			var data=new con.User({email:email,password:password});
 					data.save(function(err,data){
 						if(err){
@@ -35,7 +38,11 @@ router.post('/signup',function(req,res){
 
 
 
-
+/*
+ |--------------------------------------------------------------------------
+ |Stroring project detail
+ |--------------------------------------------------------------------------
+ */
 router.post('/project', function(req, res) {
     console.log(req.body);
     var projectName = req.body.pro;
@@ -52,13 +59,27 @@ router.post('/project', function(req, res) {
                 res.send('project already available');
                 //console.log(err);
             } else {
+               con.project.find(function(err,result){
+                 if(err){
+                   res.send('data not prasent');
+                 }
+                 else{
+                   res.send(result);
+                 }
+               
+               })
               console.log("print user");
-                res.send('successfully upload');
+                // res.send(user);
 
             }
         })
 
 });
+/*
+ |--------------------------------------------------------------------------
+ | Login 
+ |--------------------------------------------------------------------------
+ */
 
 router.post('/login',function(req,res){
 		var email=req.body.email;
@@ -116,4 +137,12 @@ router.post('/verify', function(req, res) {
     }
 });
 
+// /*
+//  |--------------------------------------------------------------------------
+//  | Retriving project detail from mongo
+//  |--------------------------------------------------------------------------
+//  */
+// router.get('/retrive',function(req,res){
+//   con.project.find({projectname})
+// })
 module.exports = router;
