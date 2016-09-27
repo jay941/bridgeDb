@@ -41,6 +41,9 @@ $http.post('http://localhost:8090/retrive',data).success(function (data) {
        });
             });
  };
+ $scope.project=function(){
+     $location.path('project')  ;
+ }
     })
  .directive('navHeader', function() {
 return {
