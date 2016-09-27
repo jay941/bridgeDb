@@ -20,7 +20,6 @@
                         <form method="post">
                             <div class="form-group">
                                 <label for="projectname">project name</label>
-
                                 <input type="text" class="form-control" id="projectname" placeholder="Enter name" ng-model="projectName">
                             </div>
                             <!-- <button type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-off"></span> Login</button> -->
@@ -36,15 +35,16 @@
             </div>
         </div>
     </div>
-    <hr>
-    <div class="container">
-        <div ng-repeat="d in projectName1 track by $index">
-            <div class="col-sm-4">
-                <div class="div1">{{d.projectName}}</div>
+</div>
+<hr>
+<div class="container">
+    <div ng-repeat="d in projectName1 track by $index">
+        <div class="col-sm-4">
+            <div class="div1">{{d.projectName}}</div>
 
-            </div>
         </div>
     </div>
+</div>
 </div>
 
 
